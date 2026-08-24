@@ -24,6 +24,48 @@ func computeStats(nums []int) (float64, float64, int) {
 	var mean float64
 	var median float64
 	var mode int
+
+	n := len(nums)
+
+	// mean 
+	if n > 0 {
+		total := 0
+		for _, v := range nums {
+			total += v
+		}
+		mean = float64(total) / float64(n)
+	}
+
+	// median
+	sortedCopy := make([]int, n)
+	copy(sortedCopy, nums)
+	sort.Ints(sortedCopy)
+
+	if n > 0 {
+		mid := n / 2
+		if n%2 == 0 {
+			median = float64(sortedCopy[mid-1]+sortedCopy[mid]) / 2.0
+		} else {
+			median = float64(sortedCopy[mid])
+		}
+	}
+
+	// mode
+	frequency := make(map[int]int)
+	for _, v := range nums {
+		frequency[v]++
+	}
+
+	if len(frequency) > 0 {
+		maxFreq := 0
+		for _, v := range sortedCopy { // ascending order, so ties resolve to smallest
+			f := frequency[v]
+			if f > maxFreq {
+				maxFreq = f
+				mode = v
+			}
+		}
+	}
 	return mean, median, mode
 }
 

@@ -42,13 +42,10 @@ def compute_stats(nums: List[int]) -> Tuple[float, float, int]:
     frequency = {} #dictionary to save frequency of each number
     for num in nums:
         frequency[num] = frequency.get(num, 0) + 1 #increment frequency count for each number
-    max_freq = max(frequency.values(), default=0) #find the maximum frequency of any number in the list
-    modes = [num for num, freq in frequency.items() if freq == max_freq] #list of numbers that have the maximum frequency
-    if len(modes) >1:
-        sorted_modes = sorted(modes) #sort the modes in ascending order
-        mode = sorted_modes[0] #return the smallest mode if there are multiple modes
-    if len(modes) == len(frequency): 
-        mode = None  # No mode if all numbers are unique
+    if frequency:
+        max_freq = max(frequency.values())
+        modes = [num for num, freq in frequency.items() if freq == max_freq]
+        mode = min(modes)  # smallest value among those tied for most frequent
     
     return (mean, median, mode)
     # TODO
