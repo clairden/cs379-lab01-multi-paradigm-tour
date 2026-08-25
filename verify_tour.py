@@ -82,6 +82,8 @@ def run_impl(command: list, args: list) -> str:
 def main() -> int:
     failures: list = []
 
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))  # ensure we're in the right directory
+
     py_cmd = [sys.executable, "stats.py"]
     c_bin = find_binary("stats_c", "stats_c.exe", "./stats_c")
     go_bin = find_binary("stats_go", "stats_go.exe", "./stats_go")
