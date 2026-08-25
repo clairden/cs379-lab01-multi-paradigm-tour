@@ -27,7 +27,7 @@ func computeStats(nums []int) (float64, float64, int) {
 
 	n := len(nums)
 
-	// mean 
+	// mean
 	if n > 0 {
 		total := 0
 		for _, v := range nums {
